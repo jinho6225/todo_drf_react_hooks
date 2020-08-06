@@ -1,9 +1,14 @@
 import React, { useState, useEffect }  from 'react';
 import './App.css';
 
-
-
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/task-list")
+      .then((res) => res.json())
+      .then((data) => setTasks(data));
+  },[]);
 
   return (
     <div className="container">
@@ -19,13 +24,17 @@ function App() {
       </div>
       <div className="list-container">
         <ul className="unorder-list">
-          <li className="task-list">
-            <span className="content ">E-commerce web app</span>
-            <span className="icon">
-              <i className="far fa-edit" aria-hidden="true"></i>
-              <i className="far fa-trash-alt" aria-hidden="true"></i>
-            </span>
-          </li>
+          {tasks.map((task) => {
+            return (
+              <li className="task-list" key={task.id}>
+                <span className="content ">{task.title}</span>
+                <span className="icon">
+                  <i className="far fa-edit" aria-hidden="true"></i>
+                  <i className="far fa-trash-alt" aria-hidden="true"></i>
+                </span>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </div>
