@@ -23,10 +23,14 @@ function getCookie(name) {
 function App() {
   const [taskList, setTaskList] = useState([])
 
-  useEffect(() => {
+  const todoList = () => {
     fetch("http://127.0.0.1:8000/api/task-list")
-      .then((res) => res.json())
-      .then((data) => setTaskList(data));
+    .then((res) => res.json())
+    .then((data) => setTaskList(data));
+  }
+
+  useEffect(() => {
+    todoList()
   },[]);
 
   const addTodo = (todo) => {
@@ -45,6 +49,22 @@ function App() {
     })
   }
 
+  const deleteTodo = (id) => {
+    console.log(id, 'id')
+    const csrftoken = getCookie('csrftoken');
+    let URL = `http://127.0.0.1:8000/api/task-delete/${id}`
+    fetch(URL, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+    })
+    .then(res => {
+      todoList()
+    })
+  }
+
   
   return (
     <div className="container">
@@ -53,7 +73,7 @@ function App() {
         <h4>(Django RESTful api + React Hooks)</h4>
       </header>
       <AddTask addTodo={addTodo} />
-      <ListOfTodo taskList={taskList}/>
+      <ListOfTodo taskList={taskList} deleteTodo={deleteTodo}/>
     </div>
   );
 }

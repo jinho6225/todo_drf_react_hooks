@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const ListOfTodo = ({ taskList }) => {
+const ListOfTodo = ({ taskList, deleteTodo }) => {
     
     return (
       <div className="list-container">
@@ -15,7 +15,13 @@ const ListOfTodo = ({ taskList }) => {
                                 <span className="content ">{title}</span>
                                 <span className="icon">
                                     <i className="far fa-edit" aria-hidden="true"></i>
-                                    <i className="far fa-trash-alt" aria-hidden="true"></i>
+                                    <i 
+                                        className="far fa-trash-alt" 
+                                        aria-hidden="true"
+                                        onClick={() => {
+                                            deleteTodo(id)
+                                        }}
+                                        ></i>
                                 </span>
                             </li>
                     )})

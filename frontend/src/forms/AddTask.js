@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 
 const AddTask = ({ addTodo}) => {
-    const initialFormState = {title: '', completed: false}
+    const initialFormState = {id: null, title: '', completed: false}
     const [todo, setTodo] = useState(initialFormState)
 
     const handleChange = e => {
