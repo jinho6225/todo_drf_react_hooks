@@ -1,5 +1,7 @@
 import React, { useState, useEffect }  from 'react';
-import ListOfTodo from './List/ListOfTodo'
+import ListOfTodo from './list/ListOfTodo'
+import AddTask from './forms/AddTask'
+
 import './App.css';
 
 function getCookie(name) {
@@ -27,6 +29,22 @@ function App() {
       .then((data) => setTaskList(data));
   },[]);
 
+  const addTodo = (todo) => {
+    const csrftoken = getCookie('csrftoken');
+    let URL = "http://127.0.0.1:8000/api/task-create/"
+    fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      body: JSON.stringify({ title: todo.title }),
+    })
+    .then(res => {
+      setTaskList([...taskList, todo])
+    })
+  }
+
   
   return (
     <div className="container">
@@ -34,12 +52,7 @@ function App() {
         <h2>Todo List</h2>
         <h4>(Django RESTful api + React Hooks)</h4>
       </header>
-      <div className="inputBox">
-        <form method="POST" className="inputForm">
-          <input type="text" placeholder="Add task" className="inputField" />
-          <button type="submit" className="submitBtn" >Submit</button>
-        </form>
-      </div>
+      <AddTask addTodo={addTodo} />
       <ListOfTodo taskList={taskList}/>
     </div>
   );

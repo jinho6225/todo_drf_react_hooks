@@ -9,7 +9,7 @@ const ListOfTodo = ({ taskList }) => {
 
             {taskList.length > 0 ? (
                 taskList.map(task => {
-                    const {id, completed, title} = task;
+                    const {id, title} = task;
                         return (
                             <li className="task-list" key={id}>
                                 <span className="content ">{title}</span>
