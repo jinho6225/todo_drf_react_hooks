@@ -1,6 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import ListOfTodo from './list/ListOfTodo'
 import AddTask from './forms/AddTask'
+import UpdateTask from './forms/UpdateTask'
 
 import './App.css';
 
@@ -65,15 +66,69 @@ function App() {
     })
   }
 
-  
+  const [editing, setEditing] = useState(false)
+  const initialFormState = { id: null, title: '' }
+  const [currentTodo, setCurrentTodo] = useState(initialFormState)
+
+  const currentUpdate = (id, title) => {
+    setEditing(true)
+    setCurrentTodo({id, title})
+  }
+
+  const updateTodo = ({ id, title }) => {
+    setEditing(false)
+    const csrftoken = getCookie('csrftoken');
+    let URL = `http://127.0.0.1:8000/api/task-update/${id}`
+    fetch(URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      body: JSON.stringify({ title }),
+    })
+    .then(res => {
+      todoList()
+    })
+  }
+
+  const lineThrough = (todo) => {
+    todo.completed = !todo.completed
+    const csrftoken = getCookie('csrftoken');
+    let URL = `http://127.0.0.1:8000/api/task-update/${todo.id}`
+    fetch(URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      body: JSON.stringify({ 
+          title: todo.title, 
+          completed: todo.completed 
+        }),
+    })
+    .then(res => {
+      todoList()
+    })
+  }
+
   return (
     <div className="container">
       <header className="header">
         <h2>Todo List</h2>
         <h4>(Django RESTful api + React Hooks)</h4>
       </header>
-      <AddTask addTodo={addTodo} />
-      <ListOfTodo taskList={taskList} deleteTodo={deleteTodo}/>
+      {editing ? (
+        <UpdateTask updateTodo={updateTodo} currentTodo={currentTodo} />
+      ) : (
+        <AddTask addTodo={addTodo} />
+      )}
+      <ListOfTodo 
+        taskList={taskList} 
+        deleteTodo={deleteTodo} 
+        currentUpdate={currentUpdate} 
+        lineThrough={lineThrough
+        }/>
     </div>
   );
 }
