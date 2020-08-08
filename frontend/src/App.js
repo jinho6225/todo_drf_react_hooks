@@ -25,7 +25,9 @@ function App() {
   const [taskList, setTaskList] = useState([])
 
   const todoList = () => {
-    fetch("http://127.0.0.1:8000/api/task-list")
+    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-list`
+    fetch(URL)
+
     .then((res) => res.json())
     .then((data) => setTaskList(data));
   }
@@ -36,7 +38,9 @@ function App() {
 
   const addTodo = (todo) => {
     const csrftoken = getCookie('csrftoken');
-    let URL = "http://127.0.0.1:8000/api/task-create/"
+    // let URL = "http://127.0.0.1:8000/api/task-create/"
+    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-create/`
+
     fetch(URL, {
       method: 'POST',
       headers: {
@@ -53,7 +57,9 @@ function App() {
   const deleteTodo = (id) => {
     console.log(id, 'id')
     const csrftoken = getCookie('csrftoken');
-    let URL = `http://127.0.0.1:8000/api/task-delete/${id}`
+    // let URL = `http://127.0.0.1:8000/api/task-delete/${id}`
+    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-delete/${id}`
+
     fetch(URL, {
       method: 'DELETE',
       headers: {
@@ -78,7 +84,8 @@ function App() {
   const updateTodo = ({ id, title }) => {
     setEditing(false)
     const csrftoken = getCookie('csrftoken');
-    let URL = `http://127.0.0.1:8000/api/task-update/${id}`
+    // let URL = `http://127.0.0.1:8000/api/task-update/${id}`
+    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-update/${id}`    
     fetch(URL, {
       method: 'PUT',
       headers: {
@@ -95,7 +102,8 @@ function App() {
   const lineThrough = (todo) => {
     todo.completed = !todo.completed
     const csrftoken = getCookie('csrftoken');
-    let URL = `http://127.0.0.1:8000/api/task-update/${todo.id}`
+    // let URL = `http://127.0.0.1:8000/api/task-update/${todo.id}`
+    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-update/${todo.id}`
     fetch(URL, {
       method: 'PUT',
       headers: {
