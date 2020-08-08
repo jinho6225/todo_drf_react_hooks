@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const ListOfTodo = ({ taskList, deleteTodo, currentUpdate, lineThrough }) => {
 
     return (
@@ -47,7 +46,6 @@ const ListOfTodo = ({ taskList, deleteTodo, currentUpdate, lineThrough }) => {
                         </span>
                     </li>
             )}
-
         </ul>
         </div>
     )

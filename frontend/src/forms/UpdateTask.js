@@ -16,9 +16,11 @@ const UpdateTask = ({ currentTodo, updateTodo }) => {
 
     const handleSubmit = e => {
         e.preventDefault()
+
         if (!todo.title) return
+   
         updateTodo(todo)
-        const initialFormState = { id: null, title: '' }
+        const initialFormState = { title: '' }
         setTodo(initialFormState)
     }
     

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 
 const AddTask = ({ addTodo}) => {
-    const initialFormState = {id: null, title: '', completed: false}
+    const initialFormState = {title: '', completed: false}
     const [todo, setTodo] = useState(initialFormState)
 
     const handleChange = e => {
@@ -14,7 +14,7 @@ const AddTask = ({ addTodo}) => {
         e.preventDefault()
         if (!todo.title) return
 
-        addTodo(todo)
+        addTodo(todo.title)
         setTodo(initialFormState)
     }
     
