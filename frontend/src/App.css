@@ -3,7 +3,7 @@
   }
   :root {
     --lightgray-color: #fbe9e7;
-    --white-color: #ffffee;
+    --white-color: #f3e5f5;
     --shadow-color: #777;
   
     --padding: 8px;
@@ -14,8 +14,8 @@
     --large-font: 20px
   }
   body{
-    background: #ffccbc;
-    background: linear-gradient(90deg, #ffccbc 0%, #ffffee 50%, #ffccbc 100%);
+    background: #e1bee7;
+    background: linear-gradient(90deg, #e1bee7 0%, #fff1ff 50%, #e1bee7 100%);
   }
   .container {
     margin-top: 5%;
@@ -43,7 +43,7 @@
   .submitBtn {
     font-size: var(--normal-font);
     flex-grow: 1;
-    background-color: #ffccbc;
+    background-color: #e1bee7;
     border: 0;
     width: 15%;
   }
