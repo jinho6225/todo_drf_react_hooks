@@ -11,7 +11,7 @@ Try the application live at [https://jhmyung6225.pythonanywhere.com/](https://jh
 ## Technologies Used
 - React.js
 - Hooks (useState, useEffect)
-- Variable CSS
+- CSS Variables 
 - HTML
 - Python
 - Django RESTful API
