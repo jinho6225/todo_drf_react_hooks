@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from 'react';
-import ListOfTodo from './list/ListOfTodo'
+import ListOfTodo from './List/ListOfTodo'
 import AddTask from './forms/AddTask'
 import UpdateTask from './forms/UpdateTask'
 
@@ -25,8 +25,8 @@ function App() {
   const [taskList, setTaskList] = useState([])
 
   const todoList = () => {
-    // let URL = `http://127.0.0.1:8000/api/task-list`
-    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-list`
+    let URL = `http://127.0.0.1:8000/api/task-list`
+    // let URL = `https://jhmyung6225.pythonanywhere.com/api/task-list`
     fetch(URL)
 
     .then((res) => res.json())
@@ -39,8 +39,8 @@ function App() {
 
   const addTodo = (title) => {
     const csrftoken = getCookie('csrftoken');
-    // let URL = "http://127.0.0.1:8000/api/task-create/"
-    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-create/`
+    let URL = "http://127.0.0.1:8000/api/task-create/"
+    // let URL = `https://jhmyung6225.pythonanywhere.com/api/task-create/`
 
     fetch(URL, {
       method: 'POST',
@@ -57,8 +57,8 @@ function App() {
 
   const deleteTodo = (id) => {
     const csrftoken = getCookie('csrftoken');
-    // let URL = `http://127.0.0.1:8000/api/task-delete/${id}`
-    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-delete/${id}`
+    let URL = `http://127.0.0.1:8000/api/task-delete/${id}`
+    // let URL = `https://jhmyung6225.pythonanywhere.com/api/task-delete/${id}`
 
     fetch(URL, {
       method: 'DELETE',
@@ -84,8 +84,8 @@ function App() {
   const updateTodo = (todo) => {
     setEditing(false)
     const csrftoken = getCookie('csrftoken');
-    // let URL = `http://127.0.0.1:8000/api/task-update/${todo.id}`
-    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-update/${todo.id}`    
+    let URL = `http://127.0.0.1:8000/api/task-update/${todo.id}`
+    // let URL = `https://jhmyung6225.pythonanywhere.com/api/task-update/${todo.id}`    
     fetch(URL, {
       method: 'PUT',
       headers: {
@@ -102,8 +102,8 @@ function App() {
   const lineThrough = (todo) => {
     todo.completed = !todo.completed
     const csrftoken = getCookie('csrftoken');
-    // let URL = `http://127.0.0.1:8000/api/task-update/${todo.id}`
-    let URL = `https://jhmyung6225.pythonanywhere.com/api/task-update/${todo.id}`
+    let URL = `http://127.0.0.1:8000/api/task-update/${todo.id}`
+    // let URL = `https://jhmyung6225.pythonanywhere.com/api/task-update/${todo.id}`
     fetch(URL, {
       method: 'PUT',
       headers: {
