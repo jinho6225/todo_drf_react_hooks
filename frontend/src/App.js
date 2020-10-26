@@ -1,10 +1,10 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect, useCallback }  from 'react';
 import ListOfTodo from './List/ListOfTodo'
 import AddTask from './forms/AddTask'
 import UpdateTask from './forms/UpdateTask'
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux'
-
+import { requestTodos } from './action'
 
 function getCookie(name) {
   let cookieValue = null;
@@ -24,20 +24,14 @@ function getCookie(name) {
 
 function App() {
   const dispatch = useDispatch()
-  const selector = useSelector(state => state)
-  useSelector(state => console.log(state, 'state'))
-  console.log(dispatch, 'dispatch')
-  console.log(selector, 'selector')
-
-  const [taskList, setTaskList] = useState([])
+  const taskList = useSelector(state => state.todos)
+  const requestTodoList = useCallback(
+    () => dispatch(requestTodos()),
+    [dispatch]
+  )
 
   const todoList = () => {
-    let URL = `http://127.0.0.1:8000/api/task-list`
-    // let URL = `https://jhmyung6225.pythonanywhere.com/api/task-list`
-    fetch(URL)
-
-    .then((res) => res.json())
-    .then((data) => setTaskList(data));
+    requestTodoList()
   }
 
   useEffect(() => {
@@ -139,7 +133,8 @@ function App() {
         <AddTask addTodo={addTodo} />
       )}
       <ListOfTodo 
-        taskList={taskList} 
+        taskList={taskList}
+
         deleteTodo={deleteTodo} 
         currentUpdate={currentUpdate} 
         lineThrough={lineThrough
