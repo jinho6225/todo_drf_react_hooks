@@ -3,6 +3,8 @@ import ListOfTodo from './List/ListOfTodo'
 import AddTask from './forms/AddTask'
 import UpdateTask from './forms/UpdateTask'
 import './App.css';
+import { useSelector, useDispatch } from 'react-redux'
+
 
 function getCookie(name) {
   let cookieValue = null;
@@ -21,6 +23,12 @@ function getCookie(name) {
 }
 
 function App() {
+  const dispatch = useDispatch()
+  const selector = useSelector(state => state)
+  useSelector(state => console.log(state, 'state'))
+  console.log(dispatch, 'dispatch')
+  console.log(selector, 'selector')
+
   const [taskList, setTaskList] = useState([])
 
   const todoList = () => {
