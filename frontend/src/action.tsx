@@ -1,10 +1,9 @@
-export const REQUEST_PENDING = 'REQUEST_PENDING';
-export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
-export const REQUEST_FAILED = 'REQUEST_FAILED';// export const TOGGLE_TODO = 'TOGGLE_TODO'
-// export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const REQUEST_PENDING = 'REQUEST_PENDING' as const
+export const REQUEST_SUCCESS = 'REQUEST_SUCCESS' as const
+export const REQUEST_FAILED = 'REQUEST_FAILED' as const
 
 
-export const requestTodos = () => (dispatch) => {
+export const requestTodos = () => (dispatch: any) => {
     dispatch({ type: REQUEST_PENDING });
     fetch('http://127.0.0.1:8000/api/task-list/')
         .then((res) => res.json())

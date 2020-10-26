@@ -21,7 +21,7 @@ const initialState = {
     // error3: '',
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: any) => {
     switch (action.type) {
         case REQUEST_PENDING:
             return Object.assign({}, state, { isPending: true });
@@ -41,6 +41,9 @@ const reducer = (state = initialState, action) => {
 
 // const rootReducer = combineReducers(reducer)
 const store = createStore(reducer, applyMiddleware(thunk))
+
+export type RootState = ReturnType<typeof reducer>;
+
 
 ReactDOM.render(
 <Provider store={store}>

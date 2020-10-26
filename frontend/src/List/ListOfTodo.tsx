@@ -1,22 +1,28 @@
 import React from 'react';
 
-const ListOfTodo = ({ taskList, deleteTodo, currentUpdate, lineThrough }) => {
+type ListofTodoProps = {
+    taskList: any;
+    deleteTodo: (id: string | number) => void;
+  };
 
+
+const ListOfTodo = ({ taskList, deleteTodo }: ListofTodoProps) => {
+    console.log(taskList, 'taskList')
     return (
       <div className="list-container">
         <ul className="unorder-list">
 
-            {taskList.length > 0 ? (
-                taskList.map(task => {
-                    const {id, title} = task;
+            {taskList && taskList.length > 0 ? (
+                taskList.map((task: any) => {
+                    const {id, title, completed} = task;
                     // let className = `content`;
                     // if (task.completed) className = `content active`
                         return (
                             <li className="task-list" key={id}>
                                 <span 
-                                    className={`content ${task.completed ? 'active' : ''}`}
+                                    className={`content ${completed ? 'active' : ''}`}
                                     onClick={() => {
-                                        lineThrough(task)
+                                        // lineThrough(task)
                                     }}
                                 >{title}</span>
                                 <span className="icon">
@@ -24,7 +30,7 @@ const ListOfTodo = ({ taskList, deleteTodo, currentUpdate, lineThrough }) => {
                                         className="far fa-edit" 
                                         aria-hidden="true"
                                         onClick={() => {
-                                            currentUpdate(id, title)
+                                            // currentUpdate(id, title)
                                         }}
                                         ></i>
                                     <i 
