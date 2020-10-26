@@ -2,7 +2,6 @@ import React, { useState, useEffect }  from 'react';
 import ListOfTodo from './List/ListOfTodo'
 import AddTask from './forms/AddTask'
 import UpdateTask from './forms/UpdateTask'
-
 import './App.css';
 
 function getCookie(name) {
